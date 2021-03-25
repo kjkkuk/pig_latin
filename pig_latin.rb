@@ -3,6 +3,7 @@
 require 'rubygems'
 require 'minitest/autorun'
 
+# Translate strings to pig latin
 class PiglatinTranslatorTest < MiniTest::Test
   VOWELS = %w[a e i o u].freeze
 
@@ -18,18 +19,20 @@ class PiglatinTranslatorTest < MiniTest::Test
     assert_equal 'ingstray', translate('string')
   end
 
-#   def test_sentence
-#     assert_equal 'jej ejej ejej ejeje ejeje', translate('ekwjhfrkwjehfkjw')
-#   end
+  def test_sentence
+    assert_equal 'ingstray eatyay igpay', translate('string eat pig')
+  end
 
-  def translate(word)
-    first_letter = word[0]
-    if VOWELS.include?(first_letter)
-      word.split('')
-      "#{word}yay"
-    else
-      index = word.chars.index { |x| VOWELS.include? x }
-      "#{word[index..-1]}#{word[0..index - 1]}ay"
+  def translate(str)
+    b = str.split(' ').map do |word|
+      first_letter = word[0]
+      if VOWELS.include?(first_letter)
+        "#{word.split('')}yay"
+      else
+        index = word.chars.index { |x| VOWELS.include? x }
+        "#{word[index..-1]}#{word[0..index - 1]}ay"
+      end
     end
+    b.join(' ')
   end
 end
