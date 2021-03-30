@@ -23,8 +23,8 @@ class PiglatinTranslatorTest < MiniTest::Test
     assert_equal 'ingstray eatyay igpay', translate('string eat pig')
   end
 
-  def translate(str)
-    b = str.split(' ').map do |word|
+  def translate(string)
+    words_array = string.split(' ').map do |word|
       first_letter = word[0]
       if VOWELS.include?(first_letter)
         "#{word.split('')}yay"
@@ -33,6 +33,6 @@ class PiglatinTranslatorTest < MiniTest::Test
         "#{word[index..-1]}#{word[0..index - 1]}ay"
       end
     end
-    b.join(' ')
+    words_array.join(' ')
   end
 end
